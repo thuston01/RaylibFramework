@@ -29,7 +29,7 @@ T Config::Get(const string& id)
 	Json json = m_json;
 
 	// Split string into its parts and iterate over them
-	for (string part : splitsStr(id))
+	for (string part : splitStr(id))
 	{
 		// Try to get the child component
 		if (json.contains(part))
@@ -39,7 +39,7 @@ T Config::Get(const string& id)
 		}
 
 		// The part of the id we are looking for doesn' exist, so return default.
-		return T{}
+		return T{};
 	}
 
 	// Return the node data if it was found, otherwise the default value
