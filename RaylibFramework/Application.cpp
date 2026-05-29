@@ -28,4 +28,34 @@ shared_ptr<Window> Application::GetWindow() const
 
 EExitCode Application::Run() const
 {
+	// Attempt to open the window, returning fail conde if it does not succeed
+	if (!m_window->Open())
+	{
+		return EExitCode::WindowFailedToOpen;
+	}
+
+	// Initialise the game instance
+	m_game->Init();
+
+	//Continue to loop until the window requests a close
+	while (m_window->IsOpen())
+	{
+		//Tick the game with the current frame time
+		const float dt = GetFrameTime();
+		m_game->Tick(dt);
+
+		//Render the game
+		m_window->BeginFrame();
+
+		m_game->Render();
+
+		m_window->EndFrame();
+	}
+
+	//Shutdown the game instance and close the window
+	m_game->Shutdown();
+	m_window->Close();
+
+	// Return success as the whole gameplay loop ran successfully.
+	return EExitCode::Success;
 }
