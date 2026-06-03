@@ -17,7 +17,7 @@ public:
 	 * @brief Constructs a SoundResource and loads the sound from the given path.
 	 * @param path The file path of the sound asset to load.
 	 */
-
+	//SoundResource(const string& path);
 
 protected:
 	/**
@@ -26,7 +26,7 @@ protected:
 	 * Reads the file at Path() and populates m_resource with the resulting
 	 * Sound. Called once during construction.
 	 */
-
+	//void Load() override;
 
 };
 

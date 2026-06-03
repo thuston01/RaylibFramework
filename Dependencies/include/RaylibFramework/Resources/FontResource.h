@@ -17,7 +17,7 @@ public:
 	 * @brief Constructs a FontResource and loads the font from the given path.
 	 * @param path The file path of the font asset to load.
 	 */
-
+	//FontResource(const string& path);
 
 protected:
 	/**
@@ -26,6 +26,6 @@ protected:
 	 * Reads the file at Path() and populates m_resource with the resulting
 	 * Font. Called once during construction.
 	 */
-
+	//void Load() override;
 
 };

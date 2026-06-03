@@ -3,9 +3,14 @@
 #include <raylib/raylib.h>
 
 #include "RaylibFramework/Application.h"
+#include "RaylibFramework/Resources/ResourceManager.h"
+#include "RaylibFramework/Resources/TextureResource.h"
+
+shared_ptr<TextureResource> crateTexture;
 
 void TestGameInstance::Init()
 {
+	crateTexture = ResourceManager::Find<TextureResource>("textures/crate");
 }
 
 void TestGameInstance::Shutdown()
@@ -22,5 +27,7 @@ void TestGameInstance::Tick(float dt)
 
 void TestGameInstance::Render()
 {
-	DrawRectangle(0, 0, 50, 50, RED);
+	Texture2D* texture = crateTexture->Get();
+
+	DrawTexture(*texture, 0, 0, WHITE);
 }

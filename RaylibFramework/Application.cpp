@@ -1,8 +1,14 @@
 #include "RaylibFramework/Application.h"
 
 #include "RaylibFramework/Config.h"
+#include "RaylibFramework/Resources/ResourceManager.h"
 
 shared_ptr<Application> Application::m_instance;
+
+void Application::Deleter::operator()(Application* app) const
+{
+	delete app;
+}
 
 shared_ptr<Application> Application::Instance()
 {
@@ -15,10 +21,10 @@ void Application::Quit()
 	m_instance->m_window->m_isOpen = false;
 }
 
-Application::Application()
+Application::Application(PrivateKey)
 	: m_config{ std::make_shared<Config>("Engine") }, m_game{ nullptr }
 {
-	m_window = std::make_shared<Window>(m_config);
+	m_window = std::make_shared<Window>(Window::PrivateKey{}, m_config);
 }
 
 shared_ptr<Window> Application::GetWindow() const
@@ -33,6 +39,8 @@ EExitCode Application::Run() const
 	{
 		return EExitCode::WindowFailedToOpen;
 	}
+
+	ResourceManager::Load(m_config);
 
 	// Initialise the game instance
 	m_game->Init();
